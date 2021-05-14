@@ -5,6 +5,8 @@ Since, available on laptop mostly, thought a cron to notify would be better!
 The scripts when setup with cron send out notifications with a sound and also log the vaccination centres in the format ```{ pincode: 413102, date: 27-05-2021, min_age_limit: 45, available_capacity: 2 }```.
 The scripts currently look out for availibility for next 3 weeks from the sys date.
 
+A sample notification
+
 ![image](https://user-images.githubusercontent.com/7105292/118262023-f2d2d500-b4d1-11eb-8c49-d99970521f4f.png)
 
 
@@ -15,9 +17,9 @@ The scripts currently look out for availibility for next 3 weeks from the sys da
 * * * * * cd ~/vaccine && ./finder_45.sh 363 >> ~/vaccine/45.log
 * * * * * cd ~/vaccine && ./finder_18.sh 363 >> ~/vaccine/18.log
 ```
-"vaccine" in the above snippet is the directory where the scripts were stored at the time of cron setup
-363 is the district Id (Can be easily obtained from COWIN network calls)
-Logs for the periodic runs are stored in ~/vaccine/45.log and ~/vaccine/18.log respectively
+- "vaccine" in the above snippet is the directory where the scripts were stored at the time of cron setup
+- 363 is the district Id (Can be easily obtained from COWIN network calls)
+- Logs for the periodic runs are stored in ~/vaccine/45.log and ~/vaccine/18.log respectively
 
 
 ## Things to change if the script does not work
