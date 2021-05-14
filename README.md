@@ -1,9 +1,9 @@
 # Vaccine availability notifier
-Fed up with checking the availability for vaccine on COWIN and with me not receiving alerts from notifiers on phones or me being away from phone during availibility caused me to think a medium I could be better notified.
+Fed up with checking the availability for vaccine on COWIN and with me not receiving alerts from notifiers on phones or me being away from phone during availability caused me to think a medium I could be better notified.
 Since, available on laptop mostly, thought a cron to notify would be better!
 
 The scripts when setup with cron send out notifications with a sound and also log the vaccination centres in the format ```{ pincode: 413102, date: 27-05-2021, min_age_limit: 45, available_capacity: 2 }```.
-The scripts currently look out for availibility for next 3 weeks from the sys date.
+The scripts currently look out for availability for next 3 weeks from the sys date.
 
 A sample notification
 
