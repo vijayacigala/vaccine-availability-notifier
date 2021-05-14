@@ -11,7 +11,7 @@ A sample notification
 
 
 ## Steps to setup cron and get notified on availibilty of vaccine 
-1. Copy the scripts to a directory and note the path
+1. Copy the scripts to a directory and note the path. Change permissions to make them executable.
 2. Setup cron(s) as below to run every minute:
 ```
 * * * * * cd ~/vaccine && ./finder_45.sh 363 >> ~/vaccine/45.log
