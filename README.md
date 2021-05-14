@@ -1,4 +1,4 @@
-# Vaccine availability notifier
+# Vaccine availability notifier (For MacOS)
 Fed up with checking the availability for vaccine on COWIN and with me not receiving alerts from notifiers on phone or me being away from phone during availability caused me to think a medium I could be better notified.
 Since, available on laptop mostly, thought a cron to notify would be better!
 
@@ -10,7 +10,7 @@ A sample notification
 ![image](https://user-images.githubusercontent.com/7105292/118262023-f2d2d500-b4d1-11eb-8c49-d99970521f4f.png)
 
 
-## Steps to setup cron and get notified on availibilty of vaccine (For MacOS)
+## Steps to setup cron and get notified on availibilty of vaccine 
 1. Copy the scripts to a directory and note the path
 2. Setup cron(s) as below to run every minute:
 ```
