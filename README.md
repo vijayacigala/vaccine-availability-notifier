@@ -26,19 +26,19 @@ A sample notification
 1. Change path to curl and jq and replace accordingly in the script in this line for finder_45.sh:
 
 ```
-temp=`/usr/bin/curl -s --location --request GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=$1&date=$dt" --header 'Host: cdn-api.co-vin.in' --header 'User-Agent: Mozilla' --header 'Cookie: troute=t1;'  | /usr/local/bin/jq '.centers | [.[] | {pincode: .pincode, date: .sessions[].date, min_age_limit: .sessions[].min_age_limit, available_capacity: .sessions[].available_capacity} | select(.available_capacity > 0)] | unique_by(.pincode,.date)'`
+temp=`/usr/bin/curl -s --location --request GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=$1&date=$dt" --header 'Host: cdn-api.co-vin.in' --header 'User-Agent: Mozilla' --header 'Cookie: troute=t1;'  | /usr/local/bin/jq '.centers | [.[] | .pincode as $pc | (.sessions[] | {pincode: $pc, date: .date, min_age_limit: .min_age_limit, available_capacity: .available_capacity}) | select(.available_capacity > 0)]'`
 
   results="[ ${results},${temp} ]"
-  results=`echo $results | /usr/local/bin/jq 'flatten'`
+  results=`echo $results | /usr/local/bin/jq flatten | /usr/local/bin/jq unique`
 ```
 
 2. Change path to curl and jq and replace accordingly in the script in this line for finder_18.sh:
 
 ```
-temp=`/usr/bin/curl -s --location --request GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=$1&date=$dt" --header 'Host: cdn-api.co-vin.in' --header 'User-Agent: Mozilla' --header 'Cookie: troute=t1;'  | /usr/local/bin/jq '.centers | [.[] | {pincode: .pincode, date: .sessions[].date, min_age_limit: .sessions[].min_age_limit, available_capacity: .sessions[].available_capacity} | select(.min_age_limit < 45) | select(.available_capacity > 0)] | unique_by(.pincode,.date)'`
+temp=`/usr/bin/curl -s --location --request GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=$1&date=$dt" --header 'Host: cdn-api.co-vin.in' --header 'User-Agent: Mozilla' --header 'Cookie: troute=t1;'  | /usr/local/bin/jq '.centers | [.[] | .pincode as $pc | (.sessions[] | {pincode: $pc, date: .date, min_age_limit: .min_age_limit, available_capacity: .available_capacity}) | select(.available_capacity > 0) | select(.min_age_limit < 45)]'`
 
   results="[ ${results},${temp} ]"
-  results=`echo $results | /usr/local/bin/jq 'flatten'`
+  results=`echo $results | /usr/local/bin/jq flatten | /usr/local/bin/jq unique`
 ```
 3. Ofcourse curl and jq should be installed on your Mac for 1 and 2
 
