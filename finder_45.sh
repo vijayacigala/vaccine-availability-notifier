@@ -6,10 +6,10 @@ results='[]'
 
 while [ $ctr -lt 3 ]
 do
-  temp=`/usr/bin/curl -s --location --request GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=$1&date=$dt" --header 'Host: cdn-api.co-vin.in' --header 'User-Agent: Mozilla' --header 'Cookie: troute=t1;'  | /usr/local/bin/jq '.centers | [.[] | {pincode: .pincode, date: .sessions[].date, min_age_limit: .sessions[].min_age_limit, available_capacity: .sessions[].available_capacity} | select(.available_capacity > 0)] | unique_by(.pincode,.date)'`
+  temp=`/usr/bin/curl -s --location --request GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=$1&date=$dt" --header 'Host: cdn-api.co-vin.in' --header 'User-Agent: Mozilla' --header 'Cookie: troute=t1;'  | /usr/local/bin/jq '.centers | [.[] | .pincode as $pc | (.sessions[] | {pincode: $pc, date: .date, min_age_limit: .min_age_limit, available_capacity: .available_capacity}) | select(.available_capacity > 0)]'`
 
   results="[ ${results},${temp} ]"
-  results=`echo $results | /usr/local/bin/jq 'flatten'`
+  results=`echo $results | /usr/local/bin/jq flatten | /usr/local/bin/jq unique`
   inc=`expr $ctr \* 7`
   dt=`date -v +"$inc"d +"%d-%m-%Y"`
   ctr=`expr $ctr + 1`
