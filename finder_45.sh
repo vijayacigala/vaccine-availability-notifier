@@ -9,7 +9,7 @@ do
   temp=`/usr/bin/curl -s --location --request GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=$1&date=$dt" --header 'Host: cdn-api.co-vin.in' --header 'User-Agent: Mozilla' --header 'Cookie: troute=t1;'  | /usr/local/bin/jq '.centers | [.[] | {pincode: .pincode, date: .sessions[].date, min_age_limit: .sessions[].min_age_limit, available_capacity: .sessions[].available_capacity} | select(.available_capacity > 0)] | unique_by(.pincode,.date)'`
 
   results="[ ${results},${temp} ]"
-  results=`echo $results | jq 'flatten'`
+  results=`echo $results | /usr/local/bin/jq 'flatten'`
   inc=`expr $ctr \* 7`
   dt=`date -v +"$inc"d +"%d-%m-%Y"`
   ctr=`expr $ctr + 1`
